@@ -7,7 +7,7 @@ import com.caiojacintho.repository.ProducerRepository;
 
 public class ConnectionFactoryTest01 {
     public static void main(String[] args) {
-        Producer producer = Producer.ProducerBuilder.builder().name("KPT").build();
+        Producer producer = Producer.builder().name("Joojo").build();
         ProducerRepository.save(producer);
     }
 }
