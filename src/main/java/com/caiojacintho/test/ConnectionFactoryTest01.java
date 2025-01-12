@@ -11,8 +11,8 @@ import java.util.List;
 @Log4j2
 public class ConnectionFactoryTest01 {
     public static void main(String[] args) {
-        Producer producer = Producer.builder().name("cA").build();
-        Producer producerToUpdate = Producer.builder().id(2).name("Rivanda Mota").build();
+        Producer producer = Producer.builder().name("Caio").build();
+        Producer producerToUpdate = Producer.builder().id(3).name("Caio Jacintho").build();
 //        ProducerService.save(producer);
 //        ProducerService.delete();
 //        ProducerService.update(producerToUpdate);
@@ -27,6 +27,14 @@ public class ConnectionFactoryTest01 {
 //        log.info(caio);
 //        List<Producer> cesar = ProducerService.findByNameAndInsertWhenNotFound("Lucca");
 //        log.info(cesar);
-        ProducerService.findByNameAndDelete("Lucca");
+//        ProducerService.findByNameAndDelete("Lucca");
+//        List<Producer> producers = ProducerService.findbyNamePreparedStatement("C or X' = 'X");
+//        log.info("Producers found : '{}", producers);
+//        List<Producer> producers = ProducerService.findbyNamePreparedStatement("C");
+//        log.info("Producers found : '{}", producers);
+        ProducerService.uptadePreparedStatement(producerToUpdate);
+
+
+
     }
 }

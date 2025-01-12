@@ -47,6 +47,24 @@ public class ProducerRepository {
         }
     }
 
+    public static void uptadePreparedStatement(Producer producer) {
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = preparedStatementUpdate(conn, producer);) {
+            int rowsAffected = ps.executeUpdate();
+            log.info(" Update producer '{}', Database rows affected: '{}' ", producer.getId(), rowsAffected);
+        } catch (SQLException e) {
+            log.error("Error while to update producer '{}'", producer.getId(), e);
+        }
+    }
+
+    private static PreparedStatement preparedStatementUpdate(Connection conn, Producer producer) throws SQLException {
+        String sql = "UPDATE `anime_store`.`producer` SET `name`= ?  WHERE (`id`= ?);";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, producer.getName());
+        ps.setInt(2, producer.getId());
+        return ps;
+    }
+
     public static List<Producer> findAll() {
         log.info("Finding all producers");
         return findbyName("");
@@ -72,6 +90,32 @@ public class ProducerRepository {
         }
         return producers;
     }
+    public static List<Producer> findbyNamePreparedStatement(String name) {
+        log.info("Finding findByName producers");
+        List<Producer> producers = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = preparedStatementFindByName(conn,name);
+             ResultSet rs = ps.executeQuery();
+             ) {
+            while (rs.next()) {
+                Producer build = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(build);
+            }
+        } catch (SQLException e) {
+            log.error("Error while to find all producer", e);
+        }
+        return producers;
+    }
+
+    private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
+        String sql = "SELECT * FROM anime_store.producer where name like ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, String.format("%%%s%%", name));
+        return ps;
+    }
 
     public static void showProducerMetaData() {
         log.info("Showing Producer Meta data");
@@ -92,6 +136,8 @@ public class ProducerRepository {
             log.error("Error while to find all producer", e);
         }
     }
+
+
 
     public static void showDriverMetaData() {
         log.info("Showing Driver Metadata");
