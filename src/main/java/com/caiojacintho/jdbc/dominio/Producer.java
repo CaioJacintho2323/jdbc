@@ -1,4 +1,4 @@
-package com.caiojacintho.dominio;
+package com.caiojacintho.jdbc.dominio;
 
 import lombok.Builder;
 import lombok.Value;

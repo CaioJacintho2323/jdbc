@@ -1,14 +1,12 @@
-package com.caiojacintho.repository;
+package com.caiojacintho.jdbc.repository;
 
-import com.caiojacintho.conn.ConnectionFactory;
-import com.caiojacintho.dominio.Producer;
+import com.caiojacintho.jdbc.conn.ConnectionFactory;
+import com.caiojacintho.jdbc.dominio.Producer;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.rmi.server.LogStream.log;
 
 
 @Log4j2

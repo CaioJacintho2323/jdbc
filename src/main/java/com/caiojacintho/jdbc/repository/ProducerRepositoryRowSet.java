@@ -1,17 +1,15 @@
-package com.caiojacintho.repository;
+package com.caiojacintho.jdbc.repository;
 
-import com.caiojacintho.conn.ConnectionFactory;
-import com.caiojacintho.dominio.Producer;
-import com.caiojacintho.listener.CustomRowSetListener;
+import com.caiojacintho.jdbc.conn.ConnectionFactory;
+import com.caiojacintho.jdbc.dominio.Producer;
+import com.caiojacintho.jdbc.listener.CustomRowSetListener;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ProducerRepositoryRowSet {
 

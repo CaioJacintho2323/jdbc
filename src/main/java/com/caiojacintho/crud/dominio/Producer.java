@@ -1,13 +1,12 @@
-package com.caiojacintho.jdbc.dominio;
+package com.caiojacintho.crud.dominio;
 
 import lombok.Builder;
 import lombok.Value;
 
-import java.util.Objects;
 @Value
 @Builder
-public final class Producer {
-    private final Integer id;
-    private final String name;
+public class Producer {
+    private Integer id;
+    private String name;
 
 }

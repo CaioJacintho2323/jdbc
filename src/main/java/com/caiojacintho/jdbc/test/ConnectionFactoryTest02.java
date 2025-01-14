@@ -1,10 +1,9 @@
-package com.caiojacintho.test;
+package com.caiojacintho.jdbc.test;
 
-import com.caiojacintho.dominio.Producer;
-import com.caiojacintho.service.ProducerServiceRowSet;
+import com.caiojacintho.jdbc.dominio.Producer;
+import com.caiojacintho.jdbc.service.ProducerServiceRowSet;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.List;
 @Log4j2
 public class ConnectionFactoryTest02 {
     public static void main(String[] args) {

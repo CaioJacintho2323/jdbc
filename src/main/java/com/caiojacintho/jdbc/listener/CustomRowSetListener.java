@@ -1,4 +1,4 @@
-package com.caiojacintho.listener;
+package com.caiojacintho.jdbc.listener;
 
 import com.mysql.cj.result.Row;
 import lombok.extern.log4j.Log4j2;

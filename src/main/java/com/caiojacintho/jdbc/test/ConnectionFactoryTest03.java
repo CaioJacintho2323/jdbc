@@ -1,7 +1,7 @@
-package com.caiojacintho.test;
+package com.caiojacintho.jdbc.test;
 
-import com.caiojacintho.dominio.Producer;
-import com.caiojacintho.service.ProducerService;
+import com.caiojacintho.jdbc.dominio.Producer;
+import com.caiojacintho.jdbc.service.ProducerService;
 
 import java.util.List;
 

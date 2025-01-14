@@ -1,10 +1,8 @@
-package com.caiojacintho.test;
+package com.caiojacintho.jdbc.test;
 
 
-import com.caiojacintho.conn.ConnectionFactory;
-import com.caiojacintho.dominio.Producer;
-import com.caiojacintho.repository.ProducerRepository;
-import com.caiojacintho.service.ProducerService;
+import com.caiojacintho.jdbc.dominio.Producer;
+import com.caiojacintho.jdbc.service.ProducerService;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.List;

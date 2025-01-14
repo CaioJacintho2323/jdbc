@@ -1,4 +1,4 @@
-package com.caiojacintho.conn;
+package com.caiojacintho.jdbc.conn;
 
 import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;

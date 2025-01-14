@@ -1,7 +1,7 @@
-package com.caiojacintho.service;
+package com.caiojacintho.jdbc.service;
 
-import com.caiojacintho.dominio.Producer;
-import com.caiojacintho.repository.ProducerRepositoryRowSet;
+import com.caiojacintho.jdbc.dominio.Producer;
+import com.caiojacintho.jdbc.repository.ProducerRepositoryRowSet;
 
 import java.util.List;
 
