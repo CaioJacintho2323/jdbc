@@ -10,7 +10,11 @@ public class ProducerService {
         ProducerRepository.save(producer);
     }
 
-    public static void delete(int id) {
+    public static void saveTransaction(List<Producer> producers) {
+        ProducerRepository.saveTransaction(producers);
+    }
+
+        public static void delete(int id) {
         requireValidId(id);
         ProducerRepository.delete(id);
     }
@@ -33,6 +37,10 @@ public class ProducerService {
     }
     public static List<Producer> findbyNamePreparedStatement(String name) {
         return ProducerRepository.findbyNamePreparedStatement(name);
+    }
+
+    public static List<Producer> callableStatementFindByName(String name) {
+        return ProducerRepository.callableStatementFindByName(name);
     }
 
     public static void showProducerMetaData() {

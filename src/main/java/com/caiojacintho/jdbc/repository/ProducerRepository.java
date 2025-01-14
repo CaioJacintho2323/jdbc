@@ -24,6 +24,37 @@ public class ProducerRepository {
         }
     }
 
+    public static void saveTransaction(List<Producer> producers) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            conn.setAutoCommit(false);
+            preparedStatementSaveTransaction(conn, producers);
+            conn.commit();
+            conn.setAutoCommit(true);
+        } catch (SQLException e) {
+            log.error("Error while to save producers '{}'", producers, e);
+        }
+    }
+
+    private static void preparedStatementSaveTransaction (Connection conn, List<Producer> producers) throws SQLException {
+        String sql = "INSERT INTO `anime_store`.`producer` (`name`) VALUES (?);";
+        Boolean shouldRollBack = false;
+        for (Producer producer : producers) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)){
+                log.info("Saving producer '{}'", producer.getName());
+                ps.setString(1, producer.getName());
+//                if (producer.getName().equals("Monteiro")) throw new SQLException("Can't save monteiro");
+                ps.execute();
+            }catch (SQLException e) {
+                e.printStackTrace();
+                shouldRollBack = true;
+            }
+        }
+        if (shouldRollBack){
+            log.warn("Rolling back transaction");
+            conn.rollback();
+        }
+    }
+
     public static void delete(int id) {
         String sql = "DELETE FROM `anime_store`.`producer` WHERE (`id`= '%d');".formatted(id);
         try (Connection conn = ConnectionFactory.getConnection();
@@ -109,13 +140,39 @@ public class ProducerRepository {
         }
         return producers;
     }
+    public static List<Producer> callableStatementFindByName(String name) {
+        log.info("Finding findByName producers");
+        List<Producer> producers = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = callableStatementFindByName(conn,name);
+             ResultSet rs = ps.executeQuery();
+             ) {
+            while (rs.next()) {
+                Producer build = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(build);
+            }
+        } catch (SQLException e) {
+            log.error("Error while to find all producer", e);
+        }
+        return producers;
+    }
 
+    private static CallableStatement callableStatementFindByName(Connection conn, String name) throws SQLException {
+        String sql = "CALL `anime_store`.`sp_get_producer_by_name`(?);";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setString(1, String.format("%%%s%%", name));
+        return cs;
+    }
     private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
         String sql = "SELECT * FROM anime_store.producer where name like ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, String.format("%%%s%%", name));
         return ps;
     }
+
 
     public static void showProducerMetaData() {
         log.info("Showing Producer Meta data");

@@ -32,8 +32,9 @@ public class ConnectionFactoryTest01 {
 //        log.info("Producers found : '{}", producers);
 //        List<Producer> producers = ProducerService.findbyNamePreparedStatement("C");
 //        log.info("Producers found : '{}", producers);
-        ProducerService.uptadePreparedStatement(producerToUpdate);
-
+//        ProducerService.uptadePreparedStatement(producerToUpdate);
+        List<Producer> producers = ProducerService.callableStatementFindByName("ri");
+        log.info("Callable found '{}'",producers);
 
 
     }
